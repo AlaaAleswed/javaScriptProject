@@ -228,6 +228,67 @@ deleteform.forEach(button => {
     });
     });
   });
+  //--------------------------------------
+//   عرض المستخدمين الحقيقيين من LocalStorage
+//--------------------------------------
+
+function loadUsersIntoTable() {
+  const tbody = document.querySelector("#usersTable tbody");
+  tbody.innerHTML = ""; // نفضّي الجدول قبل ما نضيف بيانات جديدة
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  users.forEach(user => {
+    let row = `
+      <tr>
+        <td>${user.firstName} ${user.lastName}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+        <td>No Form Taken</td>
+        <td>--</td>
+        <td class="actions-td">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn" onclick="deleteUser(${user.id})">Delete</button>
+        </td>
+      </tr>
+    `;
+    tbody.innerHTML += row;
+  });
+}
+
+// استدعاء الدالة أول ما الصفحة تفتح
+loadUsersIntoTable();
+function deleteUser(id) {
+  Swal.fire({
+    title: 'Are You Sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // احذف اليوزر حسب الـ id
+      users = users.filter(u => u.id !== id);
+
+      // رجّع خزن البيانات
+      localStorage.setItem("users", JSON.stringify(users));
+
+      // أعد تحميل الجدول
+      loadUsersIntoTable();
+
+      Swal.fire({
+        title: 'Deleted!',
+        text: 'User has been deleted.',
+        icon: 'success'
+      });
+    }
+  });
+}
+
 
   </script>
 

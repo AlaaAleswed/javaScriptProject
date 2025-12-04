@@ -1,1 +1,53 @@
-F
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="createForm.css">
+</head>
+<body>
+  <div class="container">
+      <header><h1>Create Hiring Test</h1></header>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label>Form Title</label>
+          <input
+            type="text"
+            id="formTitle"
+            placeholder="e.g., Full-Stack Developer Assessment"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Description (Optional)</label>
+          <div class="rich-toolbar" id="descToolbar">
+            <button type="button" data-cmd="bold">Bold</button>
+            <button type="button" data-cmd="italic">Italic</button>
+            <button type="button" data-cmd="underline">Underline</button>
+            <select class="font-select">
+              <option value="">Default Font</option>
+              <option value="Tajawal">Tajawal</option>
+              <option value="Amiri">Amiri</option>
+              <option value="Cairo">Cairo</option>
+            </select>
+          </div>
+          <div id="formDesc" class="rich-editor" contenteditable="true"></div>
+        </div>
+
+        <hr
+          style="margin: 40px 0; border: none; height: 1px; background: #ddd"
+        />
+
+        <div id="questionsContainer"></div>
+
+        <div class="actions">
+          <button id="saveForm" class="btn">Save Form</button>
+          <button id="cancelForm" class="btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <script src="createForm.js"></script>
+</body>
+</html>

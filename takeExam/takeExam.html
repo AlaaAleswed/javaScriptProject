@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Take Quiz</title>
+<style>
+  body {
+    font-family: Arial;
+    background: #f4f6ff;
+    padding: 20px;
+  }
+  .quiz-container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00000015;
+  }
+  .question {
+    background: #f9fbff;
+    padding: 15px;
+    border-left: 4px solid #2d336b;
+    margin-bottom: 20px;
+    border-radius: 6px;
+  }
+  .points {
+    color: #2d336b;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #00000070;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 20px #00000040;
+    width: 350px;
+  }
+  button {
+    padding: 12px 25px;
+    background: #2d336b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h2 id="quizTitle"></h2>
+  <p id="quizDesc"></p>
+
+  <div id="questionsBox"></div>
+
+  <button id="submitQuiz">Submit Quiz</button>
+</div>
+
+
+<div id="resultModal" class="modal">
+  <div class="modal-box">
+    <h2>Your Score</h2>
+    <p id="finalScore" style="font-size: 25px; font-weight: bold;"></p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+  const forms = JSON.parse(localStorage.getItem("quiz_forms") || "[]");
+  const quiz = forms[forms.length - 1];
+
+  if (!quiz) {
+    document.body.innerHTML = "<h3>No quiz found in localStorage.</h3>";
+    throw new Error("No quiz found");
+  }
+
+  document.getElementById("quizTitle").innerHTML = quiz.title;
+  document.getElementById("quizDesc").innerHTML = quiz.description;
+
+  const box = document.getElementById("questionsBox");
+
+  quiz.questions.forEach((q, index) => {
+    const div = document.createElement("div");
+    div.className = "question";
+
+    div.innerHTML = `
+      <div class="points">Points: ${q.points}</div>
+      <div>${q.text}</div>
+      <div style="margin-top: 10px;">${renderInput(q, index)}</div>
+    `;
+
+    box.appendChild(div);
+  });
+
+  function renderInput(q, index) {
+    if (q.type === "text") {
+      return `<input type="text" id="q_${index}" style="width:100%; padding:8px;">`;
+    }
+    if (q.type === "radio") {
+      return q.choices
+        .map((c, i) => `
+          <label>
+            <input type="radio" name="q_${index}" value="${i}">
+            ${c.text}
+          </label><br>
+        `)
+        .join("");
+    }
+    if (q.type === "checkbox") {
+      return q.choices
+        .map((c, i) => `
+          <label>
+            <input type="checkbox" name="q_${index}" value="${i}">
+            ${c.text}
+          </label><br>
+        `)
+        .join("");
+    }
+  }
+
+  document.getElementById("submitQuiz").onclick = () => {
+    let score = 0;
+    let total = 0;
+
+    quiz.questions.forEach((q, index) => {
+      total += q.points;
+
+      if (q.type === "text") {
+        const userAns = document.getElementById(`q_${index}`).value.trim().toLowerCase();
+        if (userAns === q.correctAnswer) score += q.points;
+      }
+
+      if (q.type === "radio") {
+        const selected = document.querySelector(`input[name="q_${index}"]:checked`);
+        if (selected && q.choices[selected.value].correct) {
+          score += q.points;
+        }
+      }
+
+      if (q.type === "checkbox") {
+        const checked = Array.from(
+          document.querySelectorAll(`input[name="q_${index}"]:checked`)
+        ).map(e => Number(e.value));
+
+        const correctArray = q.choices
+          .map((c, i) => c.correct ? i : null)
+          .filter(v => v !== null);
+
+        if (JSON.stringify(checked.sort()) === JSON.stringify(correctArray.sort())) {
+          score += q.points;
+        }
+      }
+    });
+
+    document.getElementById("finalScore").innerText = `${score} / ${total}`;
+    document.getElementById("resultModal").style.display = "flex";
+  };
+
+  function closeModal() {
+    document.getElementById("resultModal").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile - Exam Portal</title>
+  <link rel="stylesheet" href="userProfile.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="userProfile.js" defer></script>
+</head>
+<body>
+
+  <div class="container">
+    <!-- PROFILE SIDEBAR -->
+    <aside class="profileSidebar" id="profileSidebar">
+      
+      <!-- ===== NORMAL VIEW ===== -->
+      <div class="viewMode" id="viewMode">
+        <div class="profileHeader">
+          <h2 class="fullName" id="fullName">Mohammad</h2>
+          <p class="userRole">User</p>
+        </div>
+
+        <div class="profileInfo">
+          <div class="infoItem"><span class="label">First Name</span><span class="value" id="firstName">Mohammad</span></div>
+          <div class="infoItem"><span class="label">Last Name</span><span class="value" id="lastName">-</span></div>
+          <div class="infoItem"><span class="label">Email</span><span class="value" id="email">Mohammad@gmail.com</span></div>
+          <div class="infoItem"><span class="label">Phone</span><span class="value" id="phoneNumber">-</span></div>
+          <div class="infoItem"><span class="label">Age</span><span class="value" id="age">23</span></div>
+        </div>
+      </div>
+
+      <!-- ===== EDIT MODE (replaces everything except nav) ===== -->
+      <div class="editMode" id="editMode">
+        <h2 class="editTitle">Edit Profile</h2>
+        
+        <input type="text"   id="editFirstName" class="editInput" value="Alaa" />
+        <input type="text"   id="editLastName"  class="editInput" placeholder="Last Name" />
+        <input type="email"  id="editEmail"     class="editInput" value="alaa@gmail.com" />
+        <input type="text"   id="editPhone"     class="editInput" placeholder="Phone Number" />
+        <input type="number" id="editAge"       class="editInput" placeholder="Age" />
+
+        <div class="editButtons">
+          <button id="saveBtn">Save Changes</button>
+          <button id="cancelBtn">Cancel</button>
+        </div>
+      </div>
+
+      <!-- NAVIGATION – always visible -->
+      <nav class="profileNav">
+        <a href="#" class="navItem" id="editToggle">Edit Profile</a>
+        <a href="#" class="navItem">Log out</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+<div class="mainContent">
+  <h1 style="color: var(--primary-navy);">Your Exams </h1>
+  <p class="mb-12 opacity-90" style="color: var(--primary-navy);">Your assigned exams and results</p>
+
+  <div class="examsGrid">
+
+    <!-- Active Exam -->
+    <div class="examCard">
+      <div class="examHeader">
+        <h3>JavaScript Test</h3>
+        <span class="statusBadge active">Available</span>
+      </div>
+      <p class="examDesc">Basic JS quiz</p>
+      <a href="exam.html" class="startBtn">Start Exam</a>
+    </div>
+
+    <!-- Completed Exam -->
+    <div class="examCard">
+      <div class="examHeader">
+        <h3>HTML & CSS Fundamentals</h3>
+        <span class="statusBadge completed">Completed</span>
+      </div>
+      <p class="examDesc">You have completed this exam</p>
+      <div class="finalScore">92<span class="percent">%</span></div>
+    </div>
+
+  </div>
+</div>
+    
+  </div>
+
+</body>
+</html>

@@ -44,3 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
     editToggle.classList.remove('active');
   });
 });
+
+// Logout functionality
+const logoutLi = document.getElementById("tablogout");
+
+logoutLi.addEventListener("click", () => {
+  Swal.fire({
+    title: 'Are You Sure?',
+    text: "Are you sure you want to logout?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText:'Yes, Logout',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // هنا تنفذ عملية Logout
+      // مثلا: إعادة توجيه للصفحة الرئيسية أو صفحة تسجيل الدخول
+      window.location.href = "login.html"; // غيّري حسب رابط الصفحة الفعلي
+    }
+  })
+});

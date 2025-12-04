@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admindashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2 class="logo">Admin Dashboard</h2>
+    <ul class="menu">
+      <li id="tabusers" class="active">Users</li>
+      <li id="tabforms">Forms</li>
+      <li id="tablogout">Logout</li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <h1 id="mainTitle">Users Management</h1>
+    </header>
+
+    <section class="filter-section">
+      <label for="formFilter">Filter by Form:</label>
+      <select id="formFilter">
+        <option value="all">All Forms</option>
+        <option value="form1">Math Quiz</option>
+        <option value="form2">IQ Test</option>
+        <option value="form3">HR Interview Form</option>
+      </select>
+    </section>
+
+    <!-- Users Table -->
+    <section class="table-section tab-content" id="usersTable">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Form Name</th>
+              <th>Score</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>rama</td>
+              <td>rama@example.com</td>
+              <td>0799999999</td>
+              <td>Math Quiz</td>
+              <td>85</td>
+              <td class="actions-td">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>sara</td>
+              <td>sarah@example.com</td>
+              <td>0788888888</td>
+              <td>IQ Test</td>
+              <td>92</td>
+              <td class="actions-td">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Forms Table -->
+    <section class="table-section tab-content hidden" id="formsTable">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Form ID</th>
+              <th>Form Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>form1</td>
+              <td>Math Quiz</td>
+              <td class="actions-td"><button class="edit-btn">Edit</button><button class="formdelete"> Delete</button></td>
+            </tr>
+            <tr>
+              <td>form2</td>
+              <td>IQ Test</td>
+              <td class="actions-td"><button class="edit-btn">Edit</button><button class="formdelete"> Delete</button></td>
+            </tr>
+            <tr>
+              <td>form3</td>
+              <td>HR Interview Form</td>
+              <td class="actions-td"><button class="edit-btn">Edit</button> <button class="formdelete"> Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Sidebar elements
+    const usersLi = document.getElementById("tabusers");
+    const formsLi = document.getElementById("tabforms");
+
+    // Tables
+    const usersTable = document.getElementById("usersTable");
+    const formsTable = document.getElementById("formsTable");
+
+    // Title
+    const mainTitle = document.getElementById("mainTitle");
+
+    // Toggle function
+    usersLi.addEventListener("click", () => {
+      usersTable.classList.remove("hidden");
+      formsTable.classList.add("hidden");
+      mainTitle.textContent = "Users Management";
+
+      usersLi.classList.add("active");
+      formsLi.classList.remove("active");
+    });
+
+    formsLi.addEventListener("click", () => {
+      usersTable.classList.add("hidden");
+      formsTable.classList.remove("hidden");
+      mainTitle.textContent = "Forms Management";
+
+      formsLi.classList.add("active");
+      usersLi.classList.remove("active");
+    });
+// Logout functionality
+const logoutLi = document.getElementById("tablogout");
+
+logoutLi.addEventListener("click", () => {
+  Swal.fire({
+    title: 'Are You Sure?',
+    text: "Are you sure you want to logout?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText:'Yes, Logout',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // هنا تنفذ عملية Logout
+      // مثلا: إعادة توجيه للصفحة الرئيسية أو صفحة تسجيل الدخول
+      window.location.href = "login.html"; // غيّري حسب رابط الصفحة الفعلي
+    }
+  })
+});
+const deleteButtons = document.querySelectorAll(".delete-btn");
+
+deleteButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    Swal.fire({
+      title: 'Are You Sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const row = button.closest('tr');
+        
+        // Add visual effect before deletion
+        row.style.transition = 'opacity 0.3s ease';
+        row.style.opacity = '0';
+        
+        setTimeout(() => {
+          row.remove();
+          
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'The user has been deleted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        }, 300); // Wait for the fade-out effect to complete
+      }
+    });
+  });
+}); 
+const deleteform = document.querySelectorAll(".formdelete");
+deleteform.forEach(button => {
+  button.addEventListener("click", () => {
+    Swal.fire({
+      title: 'Are You Sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const row = button.closest('tr');
+        
+        // Add visual effect before deletion
+        row.style.transition = 'opacity 0.3s ease';
+        row.style.opacity = '0';
+        
+        setTimeout(() => {
+          row.remove();
+          
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'The form has been deleted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        }, 300); // Wait for the fade-out effect to complete
+      }
+    });
+    });
+  });
+
+  </script>
+
+</body>
+</html>

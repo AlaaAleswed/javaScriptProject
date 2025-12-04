@@ -24,7 +24,7 @@ body{
 .sidebar{
   width:280px;
   background: linear-gradient(180deg,var(--main-blue), #232745);
-  color: var(--white);
+  color: var(m--white);
   padding-top:20px;
   position:fixed;
   left:0; top:0; bottom:0;

@@ -85,12 +85,14 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
 
     // 5. إعادة تخزين users في localStorage
     localStorage.setItem("users", JSON.stringify(users));
+    sessionStorage.setItem("currentUserEmail", email);
+
 
     // رسالة نجاح باستخدام SweetAlert
     Swal.fire({
         icon: 'success',
         title: 'Registration Successful!',
-        text: `Your ID is: ${newId}`, // 💡 عرض الـ ID في رسالة النجاح
+        text: `Your ID is: ${newId}`, 
         confirmButtonColor: '#2D336B'
     });
 

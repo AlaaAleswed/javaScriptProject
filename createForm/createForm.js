@@ -216,12 +216,17 @@ const questionsContainer = document.getElementById("questionsContainer");
         if (questions.length === 0)
           return alert("Please add at least one question");
 
+        const totalPoints = questions.reduce((sum, q) => sum + q.points, 0);
+
+
         const formData = {
           id: "form_" + Date.now(),
           title,
           description: document.getElementById("formDesc").innerHTML,
-          questions,
           createdAt: new Date().toISOString(),
+          active: true,
+          questions,
+          totalPoints, 
         };
 
         let forms = JSON.parse(localStorage.getItem("quiz_forms") || "[]");

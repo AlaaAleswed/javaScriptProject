@@ -79,8 +79,15 @@
     </div>
 
     <script>
+      // جلب ID الفورم من الرابط
+      const urlParams = new URLSearchParams(window.location.search);
+      const formId = urlParams.get("formId");
+
+      // جلب كل الفورمز
       const forms = JSON.parse(localStorage.getItem("quiz_forms") || "[]");
-      const quiz = forms[forms.length - 1];
+
+      // اختيار الفورم الصحيح
+      const quiz = forms.find((f) => f.id === formId);
 
       if (!quiz) {
         document.body.innerHTML = "<h3>No quiz found in localStorage.</h3>";
@@ -260,6 +267,7 @@
 
       function closeModal() {
         document.getElementById("resultModal").style.display = "none";
+         window.location.href = "../userProfile/userProfile.html"; 
       }
     </script>
   </body>

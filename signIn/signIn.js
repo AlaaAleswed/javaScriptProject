@@ -5,6 +5,22 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   let password = document.getElementById("loginPassword").value.trim();
   let message = document.getElementById("loginMessage");
 
+  // ======= بيانات الأدمن الثابتة =======
+  const adminEmail = "admin@gmail.com";
+  const adminPassword = "admin123123";
+
+  // التحقق من الأدمن أولاً
+  if (email === adminEmail && password === adminPassword) {
+    sessionStorage.setItem("currentUserEmail", adminEmail);
+    message.textContent = "Admin login successful!";
+    message.style.color = "green";
+
+    setTimeout(() => {
+      window.location.href = "../adminDashboard/adminDashboard.html";
+    }, 1000);
+    return; // رجوع بعد توجيه الأدمن
+  }
+
   // جلب المستخدمين من localStorage
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -28,6 +44,11 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   message.textContent = "Login successful!";
   message.style.color = "green";
 
-  // إعادة التوجيه بعد ثانية
-  // setTimeout(() => window.location.href = "home.html", 1000);
+  // ➤ إضافة هذا السطر
+sessionStorage.setItem("currentUserEmail", user.email);
+
+// توجيه للموقع
+setTimeout(() => window.location.href = "../userProfile/userProfile.html", 1000);
+
+
 });

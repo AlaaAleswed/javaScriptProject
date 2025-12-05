@@ -96,10 +96,24 @@ body{
   min-width:220px;
   font-size:14px;
 }
-
+.ancorcreate{
+  padding: 10px 16px;
+  border:1px solid var(--main-blue);
+  margin-left:10px ;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--main-blue);
+  transition: ease-in-out 0.2s;
+}
+ .ancorcreate:hover{
+color:white;
+background-color: var(--main-blue);
+}
 /* TABLE SECTION */
 .table-section{
-  padding:30px 40px;
+  padding-top:20px ;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* ensure container doesn't break rounding */
@@ -204,6 +218,44 @@ tbody td:nth-child(5){ color: var(--main-blue); font-weight:700; } /* score */
   background-color: red;
   color: #fff;
   cursor:pointer;
+}
+/* Badge Styles */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-active {
+  background-color: #10b981;
+  color: white;
+}
+
+.badge-inactive {
+  background-color: #6b7280;
+  color: white;
+}
+
+/* Toggle Status Button */
+.toggle-status-btn {
+  background-color: #f59e0b;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  margin: 0 3px;
+  transition: all 0.3s ease;
+}
+
+.toggle-status-btn:hover {
+  background-color: #d97706;
+  transform: translateY(-2px);
 }
 /* RESPONSIVE */
 @media (max-width: 900px){

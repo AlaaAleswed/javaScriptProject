@@ -58,14 +58,9 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
 
     // ====== تخزين البيانات في LocalStorage ======
     let users = [];
-
-    // 1. جلب المستخدمين المخزنين مسبقًا
     if (localStorage.getItem("users")) {
         users = JSON.parse(localStorage.getItem("users"));
     }
-
-    // 2. تحديد رقم ID الجديد
-    // الـ ID الجديد = عدد المستخدمين الحاليين + 1
     let newId = users.length + 1; 
 
     // 3. إنشاء مستخدم جديد (وإضافة الـ ID)

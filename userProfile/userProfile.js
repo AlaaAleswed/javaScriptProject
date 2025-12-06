@@ -114,17 +114,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   document.getElementById("tablogout").addEventListener("click", () => {
-      Swal.fire({
-        title: 'Are You Sure?',
-        text: "You want to logout?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText:'Yes, Logout'
-      }).then(result => {
-        if(result.isConfirmed) 
-        window.location.href="../index/index.html";
-      });
+    Swal.fire({
+      title: "Are You Sure?",
+      text: "You want to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Logout",
+    }).then((result) => {
+      if (result.isConfirmed) window.location.href = "../index/index.html";
     });
+  });
   // ======== نهاية كود Edit Profile ========
 
   // ==========================================
@@ -136,9 +135,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = document.querySelector(".examsGrid");
     grid.innerHTML = "";
 
-    allForms.forEach((form) => {
+    const activeForms = allForms.filter((form) => form.active);
+
+    activeForms.forEach((form) => {
       let solved = currentUser.user_responses.find((r) => r.formId === form.id);
 
+      const totalPoints = form.questions.reduce((sum, q) => sum + (q.points || 0), 0);
+      
       const card = document.createElement("div");
       card.className = "examCard";
 
@@ -154,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         ${
           solved
-            ? `<div class="finalScore">${solved.totalScore}<span class="percent">points</span></div>`
+            ? `<div class="finalScore">${solved.totalScore}/${totalPoints} </div>`
             : `<a href="#" class="startBtn" onclick="startExam('${form.id}')">Start Exam</a>`
         }
 

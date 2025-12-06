@@ -41,7 +41,14 @@
       <div class="imgg">
         <img src="page1.svg" alt="Hero Image" />
       </div>
+      
     </div>
+
+    <!-- ABOUT Api -->
+<div class="quote-box">
+  <p id="quoteText">Loading...</p>
+  <p id="quoteAuthor"></p>
+</div>
 
     <!-- ABOUT SECTION -->
     <section id="about" class="about">
@@ -81,6 +88,24 @@
       function toggleMenu() {
         document.querySelector(".nav-links").classList.toggle("active");
       }
-    </script>
+   /* ========= ABOUT API ========= */
+
+  async function loadQuote() {
+    try {
+      const res = await fetch("https://api.adviceslip.com/advice");
+      const data = await res.json();
+
+      document.getElementById("quoteText").textContent = data.slip.advice;
+      document.getElementById("quoteAuthor").textContent = "";
+    } 
+    catch (error) {
+      document.getElementById("quoteText").textContent = "Failed to load quote.";
+    }
+  }
+
+  loadQuote();
+</script>
+
+
   </body>
 </html>

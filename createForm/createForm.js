@@ -6,6 +6,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const mode = urlParams.get("mode") || "create"; // create أو edit
   const formId = urlParams.get("id"); // موجود فقط لو edit
 
+  const headerTitle = document.querySelector("header h1");
+  headerTitle.textContent =
+    mode === "edit" ? "Edit Hiring Test" : "Create Hiring Test";
+
   const addQuestionWrapper = document.createElement("div");
   addQuestionWrapper.className = "add-question-wrapper";
   addQuestionWrapper.innerHTML = `<button id="addQuestionBtn" class="btn btn-success" style="padding:14px 40px; font-size:1.2rem;">Add New Question</button>`;
@@ -301,7 +305,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let forms = JSON.parse(localStorage.getItem("quiz_forms") || "[]");
 
     const formData = {
-      id: mode === "edit" && formId ? formId : "form_" + Date.now(), //newId
+      id: mode === "edit" && formId ? formId : "form_" + Date.now(),
       title,
       description: document.getElementById("formDesc").innerHTML,
       createdAt:

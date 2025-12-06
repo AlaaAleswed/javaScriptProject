@@ -17,7 +17,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
 
     setTimeout(() => {
       window.location.href = "../adminDashboard/adminDashboard.html";
-    }, 1000);
+    });
     return; // رجوع بعد توجيه الأدمن
   }
 
@@ -48,7 +48,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
 sessionStorage.setItem("currentUserEmail", user.email);
 
 // توجيه للموقع
-setTimeout(() => window.location.href = "../userProfile/userProfile.html", 1000);
+setTimeout(() => window.location.href = "../userProfile/userProfile.html");
 
 
 });

@@ -113,6 +113,18 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmButtonColor: "#2D336B",
     });
   });
+  document.getElementById("tablogout").addEventListener("click", () => {
+      Swal.fire({
+        title: 'Are You Sure?',
+        text: "You want to logout?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText:'Yes, Logout'
+      }).then(result => {
+        if(result.isConfirmed) 
+        window.location.href="../index/index.html";
+      });
+    });
   // ======== نهاية كود Edit Profile ========
 
   // ==========================================
@@ -142,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         ${
           solved
-            ? `<div class="finalScore">${solved.totalScore}<span class="percent">%</span></div>`
+            ? `<div class="finalScore">${solved.totalScore}<span class="percent">points</span></div>`
             : `<a href="#" class="startBtn" onclick="startExam('${form.id}')">Start Exam</a>`
         }
 

@@ -87,17 +87,17 @@
 
 .hero {
   width: 50%;
-  color: #7886C7;
+  color: #2D336B;
 
 }
 
 .hero h1 {
-  font-size: 70px;
+  font-size: 60px;
   margin-bottom: 15px;
 }
 
 .hero p {
-  font-size: 30px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -106,7 +106,7 @@
   font-size: 17px;
   border: none;
   border-radius: 5px;
-  background-color: #7886C7;
+  background-color: #2D336B;
   color: white;
   cursor: pointer;
   transition: 0.3s;
@@ -118,8 +118,11 @@
 }
 
 .imgg img {
-  width: 700px;
-  height: 700px;
+  width: 650px;
+  height: 550px;
+}
+.hero p {
+  color:#2D336B;
 }
 
     /* ========= ABOUT SECTION ========= */
@@ -130,7 +133,7 @@
 
     .about h2 {
       font-size: 30px;
-      color: #7886C7;
+      color:#2D336B;
       margin-bottom: 25px;
     }
 
@@ -145,7 +148,7 @@
     .service-box {
       width: 260px;
       padding: 20px;
-      background-color: #A9B5DF;
+      background-color: #2D336B;
       color: white;
       border-radius: 10px;
       box-shadow: 0px 4px 10px #d5d5d5;
@@ -153,7 +156,8 @@
       
     }
  .service-box:hover {
-      background-color:#5f6ab0;
+      background-color:#A9B5DF;
+      color:#2D336B;
     }
 
     /* ========= FOOTER ========= */

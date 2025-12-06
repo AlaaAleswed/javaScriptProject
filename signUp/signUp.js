@@ -92,8 +92,9 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
     Swal.fire({
         icon: 'success',
         title: 'Registration Successful!',
-        text: `Your ID is: ${newId}`, 
         confirmButtonColor: '#2D336B'
+    }).then(() => {
+      window.location.href = "../signIn/sigmIn.html";
     });
 
     // تفريغ الحقول

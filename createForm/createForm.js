@@ -301,7 +301,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let forms = JSON.parse(localStorage.getItem("quiz_forms") || "[]");
 
     const formData = {
-      id: mode === "edit" && formId ? formId : "form_" + Date.now(),
+      id: mode === "edit" && formId ? formId : "form_" + Date.now(), //newId
       title,
       description: document.getElementById("formDesc").innerHTML,
       createdAt:

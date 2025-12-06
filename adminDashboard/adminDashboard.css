@@ -159,12 +159,13 @@ tbody tr:hover{
   transform: translateX(2px);
 }
 tbody td{
-  padding:18px 18px;
+  padding:18px 7px;
   border-bottom:1px solid var(--border);
   font-size:14px;
   vertical-align: middle;   
   text-align:left;         
   word-break: break-word;
+  text-align: center;
 }
 
 /* color variations for specific columns if needed */

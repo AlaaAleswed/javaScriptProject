@@ -52,10 +52,13 @@ window.addEventListener("DOMContentLoaded", () => {
           choicesContainer.innerHTML = "";
           qData.choices.forEach((c) => {
             const inputType = qData.type === "radio" ? "radio" : "checkbox";
+            
+            const questionId = qData.id || "qid_" + Date.now();
             const name =
               qData.type === "radio"
-                ? "correct_radio"
-                : `correct_checkbox_${Date.now()}`;
+                ? `correct_radio_${questionId}`
+                : `correct_checkbox_${questionId}`;
+
             const cDiv = document.createElement("div");
             cDiv.className = "choice";
             cDiv.innerHTML = `
@@ -176,6 +179,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const choicesList = qDiv.querySelector(".choices");
     const textAnswerSection = qDiv.querySelector(".text-answer");
     const addChoiceBtn = qDiv.querySelector(".add-choice");
+    qDiv.setAttribute("data-qid", Date.now() + Math.random());
 
     qToolbar.querySelectorAll("button[data-cmd]").forEach((btn) => {
       btn.onclick = () => {
@@ -198,10 +202,12 @@ window.addEventListener("DOMContentLoaded", () => {
       const cDiv = document.createElement("div");
       cDiv.className = "choice";
       const inputType = typeSelect.value === "radio" ? "radio" : "checkbox";
+
+      const questionId = qDiv.getAttribute("data-qid");
       const name =
         typeSelect.value === "radio"
-          ? "correct_radio"
-          : `correct_checkbox_${Date.now()}`;
+          ? `correct_radio_${questionId}`
+          : `correct_checkbox_${questionId}`;
 
       cDiv.innerHTML = `
         <input type="text" class="choice-text" value="${text}" placeholder="Option text" />
@@ -258,8 +264,8 @@ window.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const questions = Array.from(document.querySelectorAll(".question"))
-      .map((q, i) => {
+    const questions = Array.from(document.querySelectorAll(".question")).map(
+      (q, i) => {
         const text = q.querySelector(".question-text").innerHTML.trim();
         const type = q.querySelector(".question-type").value;
         const required = q.querySelector(".required").checked;
@@ -293,8 +299,12 @@ window.addEventListener("DOMContentLoaded", () => {
           correctAnswer,
           choices,
         };
-      })
-      .filter((q) => q.text);
+      }
+    );
+    if (questions.some((q) => q.text === "")) {
+      Swal.fire({ icon: "error", text: "Please fill all question texts!" });
+      return;
+    }
 
     if (questions.length === 0) {
       Swal.fire({ icon: "error", text: "Please add at least one question" });
@@ -304,6 +314,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const totalPoints = questions.reduce((sum, q) => sum + q.points, 0);
     let forms = JSON.parse(localStorage.getItem("quiz_forms") || "[]");
 
+    //local storage
     const formData = {
       id: mode === "edit" && formId ? formId : "form_" + Date.now(),
       title,

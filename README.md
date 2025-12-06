@@ -27,7 +27,8 @@ The system aims to streamline the hiring process by allowing companies to test a
 
 * go to index folder then to the HTML file then run the file
 * signup then sign in
-* your data and the available forms will appear in your profile 
+* your data and the available forms will appear in your profile
+* to open admin dashboard you have to enter "admin@gamil.com" as email and "admin123123" as password 
 
 - Team Members:
 

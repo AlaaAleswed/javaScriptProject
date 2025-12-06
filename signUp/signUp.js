@@ -63,9 +63,10 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
     }
     let newId = users.length + 1; 
 
+    //local storage
     // 3. إنشاء مستخدم جديد (وإضافة الـ ID)
     let newUser = {
-        id: newId, // ✨ تم إضافة الـ ID هنا
+        id: newId, 
         firstName: fName,
         lastName: lName,
         age: age,

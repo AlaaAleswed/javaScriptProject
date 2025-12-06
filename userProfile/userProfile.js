@@ -124,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (result.isConfirmed) window.location.href = "../index/index.html";
     });
   });
-  // ======== نهاية كود Edit Profile ========
 
   // ==========================================
   // 2) عرض كل الامتحانات من quiz_forms
@@ -153,12 +152,13 @@ document.addEventListener("DOMContentLoaded", () => {
           </span>
         </div>
 
-        <p class="examDesc">${form.description}</p>
+        <!--<p class="examDesc">${form.description}</p> -->
+        
 
         ${
           solved
             ? `<div class="finalScore">${solved.totalScore}/${totalPoints} </div>`
-            : `<a href="#" class="startBtn" onclick="startExam('${form.id}')">Start Exam</a>`
+            : `<a href="#" class="startBtn"  onclick="startExam('${form.id}')">Start Exam</a>`
         }
 
       `;
